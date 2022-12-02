@@ -5,12 +5,12 @@ void main() => runApp(QuizApp());
 class QuizApp extends StatefulWidget {
   @override
   State <StatefulWidget> createState() {
-    return QuizAppState();
+    return _QuizAppState();
   }
 }
 
-class QuizAppState extends State <QuizApp> {
-  int mcqIndex = 0;
+class _QuizAppState extends State <QuizApp> {
+  int _mcqIndex = 0;
 
   var mcqList = [
     'Which is the smallest state in India ?',
@@ -20,7 +20,7 @@ class QuizAppState extends State <QuizApp> {
 
   void optionSelected(int optionNumber) {
     setState(() {
-      mcqIndex++;
+      _mcqIndex++;
     });
   }
 
@@ -35,7 +35,7 @@ class QuizAppState extends State <QuizApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(mcqList[mcqIndex]),
+              Text(mcqList[_mcqIndex]),
               ElevatedButton(
                 child: Text('Option 1'),
                 onPressed: () => optionSelected(1)
