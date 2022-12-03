@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './mcqQuestionWidget.dart';
+
 void main() => runApp(QuizApp());
 
 class QuizApp extends StatefulWidget {
@@ -31,31 +33,29 @@ class _QuizAppState extends State <QuizApp> {
         appBar: AppBar(
           title: Text('Quiz App'),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(mcqList[_mcqIndex]),
-              ElevatedButton(
-                child: Text('Option 1'),
-                onPressed: () => optionSelected(1)
-              ),
-              ElevatedButton(
-                child: Text('Option 2'),
-                  onPressed: () => optionSelected(2)
-              ),
-              ElevatedButton(
-                child: Text('Option 3'),
-                  onPressed: () => optionSelected(3)
-              ),
-              ElevatedButton(
-                child: Text('Option 4'),
-                onPressed: () => optionSelected(4)
-              )
-            ],
-          ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            mcqQuestionWidget(mcqQuestionText : mcqList[_mcqIndex]),
+            ElevatedButton(
+              child: Text('Option 1'),
+              onPressed: () => optionSelected(1)
+            ),
+            ElevatedButton(
+              child: Text('Option 2'),
+                onPressed: () => optionSelected(2)
+            ),
+            ElevatedButton(
+              child: Text('Option 3'),
+                onPressed: () => optionSelected(3)
+            ),
+            ElevatedButton(
+              child: Text('Option 4'),
+              onPressed: () => optionSelected(4)
+            )
+          ],
         ),
-      ),
+        ),
     );
   }
 }
