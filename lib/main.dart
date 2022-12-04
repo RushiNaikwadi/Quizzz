@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './mcqQuestionWidget.dart';
+import './mcqOptionWidget.dart';
 
 void main() => runApp(QuizApp());
 
@@ -15,12 +16,21 @@ class _QuizAppState extends State <QuizApp> {
   int _mcqIndex = 0;
 
   var mcqList = [
-    'Which is the smallest state in India ?',
-    'What is the capital of Maharashtra ?',
-    'Which is a national animal of India ?'
+    {
+      'questionText': "Which is the smallest state in India ?",
+      'optionList': ["Rajasthan", "Nagaland", "Goa", "Maharashtra"]
+    },
+    {
+      'questionText': "What is the capital of Maharashtra ?",
+      'optionList': ["Mumbai", "Nagpur", "Pune", "Nashik"]
+    },
+    {
+      'questionText': "What is India's number in terms of population",
+      'optionList': ["1", "3", "4", "2"]
+    },
   ];
 
-  void optionSelected(int optionNumber) {
+  void _optionSelected() {
     setState(() {
       _mcqIndex++;
     });
@@ -32,30 +42,21 @@ class _QuizAppState extends State <QuizApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Quiz App'),
+          backgroundColor: Colors.grey[800],
+          centerTitle: true
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            mcqQuestionWidget(mcqQuestionText : mcqList[_mcqIndex]),
-            ElevatedButton(
-              child: Text('Option 1'),
-              onPressed: () => optionSelected(1)
-            ),
-            ElevatedButton(
-              child: Text('Option 2'),
-                onPressed: () => optionSelected(2)
-            ),
-            ElevatedButton(
-              child: Text('Option 3'),
-                onPressed: () => optionSelected(3)
-            ),
-            ElevatedButton(
-              child: Text('Option 4'),
-              onPressed: () => optionSelected(4)
-            )
+            mcqQuestionWidget(mcqQuestionText : (mcqList[_mcqIndex]['questionText'] as String)),
+            mcqOptionWidget(_optionSelected),
+            mcqOptionWidget(_optionSelected),
+            mcqOptionWidget(_optionSelected),
+            mcqOptionWidget(_optionSelected),
           ],
         ),
-        ),
+        backgroundColor: Colors.grey[700],
+      ),
     );
   }
 }
