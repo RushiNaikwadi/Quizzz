@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import './mcqQuestionWidget.dart';
@@ -12,27 +14,28 @@ class QuizApp extends StatefulWidget {
   }
 }
 
+var mcqList = [
+  {
+    'questionText': "Which is the smallest state in India ?",
+    'optionList': ["Rajasthan", "Nagaland", "Goa", "Maharashtra"]
+  },
+  {
+    'questionText': "What is the capital of Maharashtra ?",
+    'optionList': ["Mumbai", "Nagpur", "Pune", "Nashik"]
+  },
+  {
+    'questionText': "What is India's number in terms of population",
+    'optionList': ["1", "3", "4", "2"]
+  },
+];
+
 class _QuizAppState extends State <QuizApp> {
   int _mcqIndex = 0;
-
-  var mcqList = [
-    {
-      'questionText': "Which is the smallest state in India ?",
-      'optionList': ["Rajasthan", "Nagaland", "Goa", "Maharashtra"]
-    },
-    {
-      'questionText': "What is the capital of Maharashtra ?",
-      'optionList': ["Mumbai", "Nagpur", "Pune", "Nashik"]
-    },
-    {
-      'questionText': "What is India's number in terms of population",
-      'optionList': ["1", "3", "4", "2"]
-    },
-  ];
 
   void _optionSelected() {
     setState(() {
       _mcqIndex++;
+      _mcqIndex %= mcqList.length;
     });
   }
 
@@ -46,13 +49,18 @@ class _QuizAppState extends State <QuizApp> {
           centerTitle: true
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 140),
             mcqQuestionWidget(mcqQuestionText : (mcqList[_mcqIndex]['questionText'] as String)),
-            mcqOptionWidget(_optionSelected),
-            mcqOptionWidget(_optionSelected),
-            mcqOptionWidget(_optionSelected),
-            mcqOptionWidget(_optionSelected),
+            ...(mcqList[_mcqIndex]['optionList'] as List<String>).map((mcqOptionText) {
+                return mcqOptionWidget(
+                    optionSelectorFunction: _optionSelected,
+                    optionText:  mcqOptionText
+                );
+            })
+
+            // ... is known as spread operator where it pulls out all
+            // the widgets from list and put them outside as a list
           ],
         ),
         backgroundColor: Colors.grey[700],
