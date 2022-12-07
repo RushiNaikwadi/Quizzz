@@ -15,7 +15,7 @@ class mcqQuestionWidget extends StatelessWidget {
       child: Text(
         mcqQuestionText,
         style: TextStyle(
-          fontSize: 30,
+          fontSize: 25,
           color: Colors.white
         ),
         textAlign: TextAlign.center
